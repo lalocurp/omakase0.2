@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OMAKASE | Panel de Administración</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <header class="navbar">
+        <div class="logo">
+            <h1>OMAKASE<span class="dot">.</span></h1>
+            <span class="subtext">URBAN CHEFWEAR</span>
+        </div>
+        <nav class="nav-links">
+            <a href="index.html">Inicio</a>
+            <a href="filipinas.php">Filipinas</a>
+            <a href="delantales.php">Delantales</a>
+            <a href="streetwear.php">Streetwear</a>
+            <a href="admin.html" class="active btn-salmon-sm">Panel BD</a>
+        </nav>
+    </header>
+
+    <main class="main-content">
+
+        <!-- 1. PANTALLA DE BLOQUEO GLOBAL -->
+        <div id="global-lock-screen" class="form-container" style="margin-top: 2rem;">
+            <h2>Acceso Restringido - Administrador</h2>
+            <p>Ingresa la clave maestra para desbloquear las herramientas del sistema.</p>
+            
+            <form onsubmit="validarAccesoAdmin(); return false;" class="crud-form">
+                <div class="form-group">
+                    <label for="pass_admin">Contraseña:</label>
+                    <div class="password-wrapper">
+                        <input type="password" id="pass_admin" placeholder="Ingresa la clave..." autocomplete="off" required>
+                        <button type="button" id="toggle-pass-btn" class="toggle-pass-btn" onclick="togglePassVisibilidad()">👁️</button>
+                    </div>
+                </div>
+                
+                <p id="error-pass" style="color: #ff5555; font-size: 0.85rem; display: none; font-weight: bold; margin-top: 0.5rem;">
+                    ❌ Contraseña incorrecta. Inténtalo de nuevo.
+                </p>
+
+                <button type="button" onclick="validarAccesoAdmin()" class="btn-salmon btn-large">Ingresar al Panel</button>
+            </form>
+        </div>
+
+        <!-- 2. ÁREA ADMINISTRATIVA PROTEGIDA -->
+        <div id="admin-protected-area" style="display: none;">
+
+            <!-- NAVEGACIÓN (Solo 2 Pestañas) -->
+            <nav class="nav-tabs" style="margin-bottom: 2rem;">
+                <button class="tab-btn active" data-tab="productos">Agregar Producto</button>
+                <button class="tab-btn" data-tab="pedidos">Crear Pedido</button>
+            </nav>
+
+            <!-- SECCIÓN 1: FORMULARIO PRODUCTOS -->
+            <section id="productos" class="tab-content active">
+                <div class="form-container">
+                    <h2>Registrar Nuevo Producto</h2>
+                    <form action="insertar_producto.php" method="POST" class="crud-form">
+                        <div class="form-group">
+                            <label for="nombre_prod">Nombre de la Prenda:</label>
+                            <input type="text" id="nombre_prod" name="nombre" placeholder="Ej. Filipina Oversize Raw" required>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="categoria_prod">Categoría:</label>
+                                <select id="categoria_prod" name="categoria" required>
+                                    <option value="Filipinas">Filipinas</option>
+                                    <option value="Delantales">Delantales</option>
+                                    <option value="Streetwear">Streetwear</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="talla_prod">Talla:</label>
+                                <select id="talla_prod" name="talla" required>
+                                    <option value="S">S</option>
+                                    <option value="M">M</option>
+                                    <option value="L">L</option>
+                                    <option value="XL">XL</option>
+                                    <option value="Unitalla">Unitalla</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="precio_prod">Precio ($ MXN):</label>
+                                <input type="number" step="0.01" id="precio_prod" name="precio" placeholder="850.00" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="stock_prod">Stock Inicial:</label>
+                                <input type="number" id="stock_prod" name="stock" placeholder="15" required>
+                            </div>
+                        </div>
+                        <button type="submit" class="btn-salmon btn-large">Guardar Producto en BD</button>
+                    </form>
+                </div>
+            </section>
+
+            <!-- SECCIÓN 2: CREACIÓN DE PEDIDOS -->
+            <section id="pedidos" class="tab-content">
+                <div class="form-container wide">
+                    <h2>Procesar Nuevo Pedido</h2>
+                    <form action="insertar_pedido.php" method="POST" class="crud-form">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="select_usuario">Cliente (ID Usuario):</label>
+                                <select id="select_usuario" name="id_usuario" required>
+                                    <option value="1">1 - Chef Kenji Sato</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="estado_pedido">Estado:</label>
+                                <select id="estado_pedido" name="estado" required>
+                                    <option value="Pendiente">Pendiente</option>
+                                    <option value="Completado">Completado</option>
+                                    <option value="Cancelado">Cancelado</option>
+                                </select>
+                            </div>
+                        </div>
+                        <hr class="divider">
+                        <h3>Detalle de Prendas</h3>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="select_producto">Producto:</label>
+                                <select id="select_producto" name="id_producto" required>
+                                    <option value="1" data-precio="1250.00">Filipina Kimono Tech - $1,250.00</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="cant_producto">Cantidad:</label>
+                                <input type="number" id="cant_producto" name="cantidad" value="1" min="1" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="precio_unitario">Precio Unitario:</label>
+                                <input type="number" step="0.01" id="precio_unitario" name="precio_unitario" value="1250.00" readonly>
+                            </div>
+                        </div>
+                        <div class="total-box">
+                            <span>Total Calculado:</span>
+                            <strong id="total_pedido">$1,250.00 MXN</strong>
+                            <input type="hidden" id="input_total" name="total" value="1250.00">
+                        </div>
+                        <button type="submit" class="btn-salmon btn-large">Finalizar Pedido</button>
+                    </form>
+                </div>
+            </section>
+
+        </div>
+
+    </main>
+
+    <!-- SCRIPT DE VALIDACIÓN -->
+    <script>
+        function togglePassVisibilidad() {
+            const input = document.getElementById('pass_admin');
+            const btn = document.getElementById('toggle-pass-btn');
+            
+            if (input.type === 'password') {
+                input.type = 'text';
+                btn.textContent = '🙈';
+            } else {
+                input.type = 'password';
+                btn.textContent = '👁️';
+            }
+        }
+
+        function validarAccesoAdmin() {
+            const input = document.getElementById('pass_admin');
+            const errorMsg = document.getElementById('error-pass');
+            const lockScreen = document.getElementById('global-lock-screen');
+            const protectedArea = document.getElementById('admin-protected-area');
+
+            const clave = input.value.trim().toLowerCase();
+
+            if (clave === "chef candia") {
+                lockScreen.style.display = 'none';
+                protectedArea.style.display = 'block';
+                errorMsg.style.display = 'none';
+            } else {
+                errorMsg.style.display = 'block';
+                input.value = '';
+                input.focus();
+            }
+        }
+    </script>
+
+    <script src="js/app.js"></script>
+</body>
+</html>

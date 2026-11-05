@@ -1,0 +1,432 @@
+/* PALETA DE COLORES: ROSA SALMÓN Y NEGRO */
+:root {
+    --black-bg: #0a0a0a;
+    --black-card: #141414;
+    --black-input: #1e1e1e;
+    --black-border: #2d2d2d;
+    --salmon-primary: #FA8072;   /* Salmon Pink Principal */
+    --salmon-hover: #e06c5f;     /* Salmon Obscuro para Hover */
+    --salmon-light: #ffb4ab;     /* Salmon Claro para acentos */
+    --text-main: #f5f5f5;
+    --text-muted: #999999;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Space Grotesk', sans-serif;
+}
+
+body {
+    background-color: var(--black-bg);
+    color: var(--text-main);
+    min-height: 100vh;
+}
+footer{
+    background-color: var(--black-bg);
+    text-align: center;
+    padding: 15px;
+    color:var(--salmon-primary) ;
+}
+
+/* NAVBAR Y NAVEGACIÓN */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.5rem 4%;
+    background-color: #000000;
+    border-bottom: 2px solid var(--salmon-primary);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.logo h1 {
+    font-size: 1.8rem;
+    font-weight: 700;
+    letter-spacing: 2px;
+    color: var(--text-main);
+}
+
+.logo .dot {
+    color: var(--salmon-primary);
+}
+
+.logo .subtext {
+    font-size: 0.65rem;
+    color: var(--salmon-primary);
+    letter-spacing: 3px;
+    display: block;
+}
+
+.nav-tabs {
+    display: flex;
+    gap: 0.8rem;
+}
+
+.tab-btn {
+    background: transparent;
+    border: 1px solid var(--black-border);
+    color: var(--text-main);
+    padding: 0.6rem 1.2rem;
+    font-size: 0.85rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border-radius: 4px;
+}
+
+.tab-btn:hover {
+    border-color: var(--salmon-primary);
+    color: var(--salmon-primary);
+}
+
+.tab-btn.active {
+    background-color: var(--salmon-primary);
+    color: #000000;
+    border-color: var(--salmon-primary);
+}
+
+/* CONTENIDO PRINCIPAL Y PESTAÑAS */
+.main-content {
+    padding: 3rem 4%;
+}
+
+.tab-content {
+    display: none;
+}
+
+.tab-content.active {
+    display: block;
+    animation: fadeIn 0.4s ease-in-out;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(8px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* CATÁLOGO GRID */
+.section-header {
+    margin-bottom: 2rem;
+}
+
+.section-header h2 {
+    font-size: 2rem;
+    color: var(--salmon-primary);
+}
+
+.products-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 1.8rem;
+}
+
+.product-card {
+    background-color: var(--black-card);
+    border: 1px solid var(--black-border);
+    padding: 1.5rem;
+    border-radius: 6px;
+    position: relative;
+    transition: transform 0.3s, border-color 0.3s;
+}
+
+.product-card:hover {
+    transform: translateY(-4px);
+    border-color: var(--salmon-primary);
+}
+
+.badge-tag {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    background-color: var(--black-input);
+    color: var(--salmon-light);
+    font-size: 0.7rem;
+    padding: 3px 8px;
+    border-radius: 3px;
+    border: 1px solid var(--black-border);
+}
+
+.category-tag {
+    display: inline-block;
+    color: var(--salmon-primary);
+    font-size: 0.8rem;
+    margin: 0.4rem 0 1rem 0;
+}
+
+.price {
+    font-size: 1.3rem;
+    font-weight: 700;
+    margin-bottom: 0.2rem;
+}
+
+.stock {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    margin-bottom: 1.2rem;
+}
+
+/* FORMULARIOS Y CONTENEDORES */
+.form-container {
+    max-width: 600px;
+    margin: 0 auto;
+    background-color: var(--black-card);
+    padding: 2.5rem;
+    border-radius: 8px;
+    border: 1px solid var(--black-border);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+}
+
+.form-container.wide {
+    max-width: 800px;
+}
+
+.form-container h2 {
+    color: var(--salmon-primary);
+    margin-bottom: 0.3rem;
+}
+
+.form-container p {
+    color: var(--text-muted);
+    font-size: 0.85rem;
+    margin-bottom: 2rem;
+}
+
+.crud-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.2rem;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+    flex: 1;
+}
+
+.form-row {
+    display: flex;
+    gap: 1rem;
+}
+
+label {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--text-main);
+}
+
+input, select {
+    width: 100%;
+    padding: 0.8rem 1rem;
+    background-color: var(--black-input);
+    border: 1px solid var(--black-border);
+    border-radius: 4px;
+    color: var(--text-main);
+    font-size: 0.9rem;
+    outline: none;
+    transition: border-color 0.3s;
+}
+
+input:focus, select:focus {
+    border-color: var(--salmon-primary);
+}
+
+/* BOTONES ROSA SALMÓN */
+.btn-salmon {
+    background-color: var(--salmon-primary);
+    color: #000000;
+    border: none;
+    padding: 0.8rem 1.5rem;
+    font-weight: 700;
+    font-size: 0.9rem;
+    cursor: pointer;
+    border-radius: 4px;
+    transition: background 0.3s;
+}
+
+.btn-salmon:hover {
+    background-color: var(--salmon-hover);
+}
+
+.btn-large {
+    width: 100%;
+    margin-top: 1rem;
+    padding: 1rem;
+    font-size: 1rem;
+}
+
+.full-width {
+    width: 100%;
+}
+
+.divider {
+    border: 0;
+    height: 1px;
+    background: var(--black-border);
+    margin: 1.5rem 0;
+}
+
+.total-box {
+    background-color: var(--black-input);
+    padding: 1.2rem;
+    border-radius: 4px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border: 1px dashed var(--salmon-primary);
+    margin-top: 1rem;
+}
+
+.total-box strong {
+    font-size: 1.3rem;
+    color: var(--salmon-primary);
+}
+/* ESTILOS DE NAVEGACIÓN Y PÁGINA DE INICIO */
+.nav-links {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+}
+
+.nav-links a {
+    color: var(--text-main);
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.9rem;
+    transition: color 0.3s;
+}
+
+.nav-links a:hover, .nav-links a.active {
+    color: var(--salmon-primary);
+}
+
+.btn-salmon-sm {
+    background-color: var(--salmon-primary);
+    color: #000 !important;
+    padding: 0.4rem 0.9rem;
+    border-radius: 4px;
+}
+
+.hero-section {
+    padding: 4rem 4%;
+    background: linear-gradient(180deg, rgba(250,128,114,0.08) 0%, rgba(10,10,10,1) 100%);
+    text-align: center;
+    border-bottom: 1px solid var(--black-border);
+}
+
+.tagline {
+    color: var(--salmon-primary);
+    font-weight: 700;
+    font-size: 0.85rem;
+    letter-spacing: 2px;
+}
+
+.hero-section h2 {
+    font-size: 2.2rem;
+    margin: 0.5rem 0 1rem 0;
+}
+
+.intro-section {
+    padding: 4rem 4%;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.intro-card {
+    background-color: var(--black-card);
+    border: 1px solid var(--black-border);
+    padding: 2.5rem;
+    border-radius: 8px;
+    margin-bottom: 2rem;
+}
+
+.intro-card h2 {
+    color: var(--salmon-primary);
+    margin-bottom: 1rem;
+}
+
+.features-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1.5rem;
+}
+
+.feature-box {
+    background-color: var(--black-card);
+    border: 1px solid var(--black-border);
+    padding: 1.5rem;
+    border-radius: 6px;
+}
+
+.feature-box h3 {
+    color: var(--salmon-primary);
+    font-size: 1rem;
+    margin-bottom: 0.5rem;
+}
+
+.category-preview {
+    padding: 3rem 4%;
+    text-align: center;
+}
+
+.category-preview h2 {
+    margin-bottom: 2rem;
+    color: var(--salmon-primary);
+}
+
+.categories-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5rem;
+}
+
+.cat-card {
+    background-color: var(--black-card);
+    border: 1px solid var(--black-border);
+    padding: 2rem;
+    border-radius: 6px;
+    text-decoration: none;
+    color: var(--text-main);
+    transition: transform 0.3s, border-color 0.3s;
+}
+
+.cat-card:hover {
+    transform: translateY(-5px);
+    border-color: var(--salmon-primary);
+}
+
+.cat-card h3 {
+    color: var(--salmon-primary);
+    margin-bottom: 0.5rem;
+}
+/* CAMPO DE CONTRASEÑA CON OJITO */
+.password-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.password-wrapper input {
+    padding-right: 2.8rem; /* Espacio para que el texto no tape el icono */
+}
+
+.toggle-pass-btn {
+    position: absolute;
+    right: 10px;
+    background: none;
+    border: none;
+    font-size: 1.1rem;
+    cursor: pointer;
+    color: var(--text-muted);
+    padding: 0.2rem;
+    user-select: none;
+    transition: transform 0.2s;
+}
+
+.toggle-pass-btn:hover {
+    transform: scale(1.15);
+}
